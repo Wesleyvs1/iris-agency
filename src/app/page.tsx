@@ -194,14 +194,18 @@ function Navbar() {
     <nav className="absolute top-0 left-0 right-0 z-50 pt-4 bg-transparent">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-1">
-          <Image
-            src="/logo (2).png"
-            alt="IRIS Agency"
-            width={140}
-            height={45}
-            className="h-10 w-auto object-contain"
-          />
+        <a href="#inicio" className="flex items-center gap-3 group">
+          <div className="relative w-14 h-11 overflow-hidden flex-shrink-0">
+            <Image
+              src="/logo (2).png"
+              alt="Logo IRIS"
+              width={300}
+              height={100}
+              className="absolute left-[-2%] top-[-5%] h-[110%] w-auto max-w-none transition-transform group-hover:scale-110"
+              priority
+            />
+          </div>
+          <span className="text-2xl font-bold tracking-[0.15em] text-white font-[family-name:var(--font-space-grotesk)]">IRIS</span>
         </a>
 
         {/* Desktop Nav */}
@@ -263,10 +267,9 @@ function HeroSection() {
   return (
     <section id="inicio" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Concentrated illumination behind 'DIGITAL' (Red area 1) */}
-        <div className="absolute top-[45%] left-[10%] w-[600px] h-[500px] rounded-full bg-iris-orange/25 blur-[140px] mix-blend-screen opacity-60" />
-        {/* Concentrated illumination behind Orbital Circle (Red area 2) */}
-        <div className="absolute top-[50%] right-[12%] -translate-y-1/2 w-[550px] h-[550px] rounded-full bg-iris-orange/15 blur-[120px] mix-blend-screen opacity-100" />
+        {/* All rounding illuminations behind text removed for requested dark section aesthetic */}
+        {/* Very subtle, tight halo only for the orbital circle to give depth without bleeding light */}
+        <div className="absolute top-[50%] right-[12%] -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-iris-orange/10 blur-[100px] mix-blend-screen opacity-50" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-iris-border to-transparent" />
       </div>
 
@@ -288,7 +291,7 @@ function HeroSection() {
             <br />
             <span className="whitespace-nowrap">O AMBIENTE</span>
             <br />
-            <span className="iris-gradient-text" style={{ filter: 'drop-shadow(0 0 20px rgba(217,119,47,0.5)) drop-shadow(0 0 60px rgba(217,119,47,0.25))' }}>DIGITAL.</span>
+            <span className="iris-gradient-text">DIGITAL.</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} custom={2} className="text-xl lg:text-[1.35rem] text-[#e8e6e3] max-w-[640px] mb-12 leading-[1.6] font-medium" style={{ textTransform: "none", letterSpacing: 0 }}>
@@ -909,14 +912,17 @@ function Footer() {
     <footer className="border-t border-iris-border-subtle py-12">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-1">
-            <Image
-              src="/logo (2).png"
-              alt="IRIS Agency"
-              width={100}
-              height={32}
-              className="h-8 w-auto object-contain"
-            />
+          <div className="flex items-center gap-3">
+            <div className="relative w-10 h-8 overflow-hidden flex-shrink-0 opacity-80">
+              <Image
+                src="/logo (2).png"
+                alt="Logo IRIS"
+                width={150}
+                height={50}
+                className="absolute left-[-2%] top-[-5%] h-[110%] w-auto max-w-none"
+              />
+            </div>
+            <span className="text-xl font-bold tracking-[0.1em] text-white font-[family-name:var(--font-space-grotesk)] opacity-90">IRIS</span>
           </div>
 
           <p className="text-xs text-iris-text-muted font-[family-name:var(--font-jetbrains-mono)]" style={{ textTransform: "none", letterSpacing: "0.02em" }}>
