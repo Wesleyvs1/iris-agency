@@ -40,7 +40,19 @@ export const organizationMembers = pgTable("organization_members", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export const contactRequests = pgTable("contact_requests", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  subject: varchar("subject", { length: 255 }),
+  message: text("message").notNull(),
+  status: varchar("status", { length: 50 }).default("pending").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Organization = typeof organizations.$inferSelect;
 export type NewOrganization = typeof organizations.$inferInsert;
+export type ContactRequest = typeof contactRequests.$inferSelect;
+export type NewContactRequest = typeof contactRequests.$inferInsert;

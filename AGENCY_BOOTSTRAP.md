@@ -26,10 +26,10 @@ All imported skills are located in [`.antigravity/skills/`](./.antigravity/skill
 - [x] Foundational Skills Import (13 Critical SaaS Skills)
 - [x] Strategic Index Creation (`AGENCY_BOOTSTRAP.md`)
 
-### Phase 2: Project Scaffold & Env
-- [ ] **Next.js Initialization**: Initialize a clean Next.js 15+ App Router project.
-- [ ] **Environment Security**: Configure `.env.local` template with all required keys (Clerk, Neon, Stripe).
-- [ ] **UI Core**: Set up `tailwind-v4`, `shadcn/ui`, and the `Double-Bezel` theme architecture.
+### Phase 2: Project Scaffold & Env (In Progress)
+- [x] **Next.js Initialization**: Initialize a clean Next.js 15+ App Router project.
+- [x] **Environment Security**: Configure `.env` and create `.env.example` template.
+- [x] **UI Core**: Set up `tailwind-v4`, `shadcn/ui`, and the base theme architecture.
 
 ### Phase 3: The First SaaS Component
 - [ ] **Auth Layer**: Implement Supabase Auth (Sign-in/Sign-up pages).

@@ -22,6 +22,8 @@ import {
   ExternalLink,
   ArrowUpRight,
 } from "lucide-react";
+import { toast } from "sonner";
+import { sendContactRequest } from "@/lib/actions";
 
 /* ─── DATA ─── */
 
@@ -234,7 +236,7 @@ function Navbar() {
             className="lg:hidden bg-[#0a0a0f]/95 backdrop-blur-xl border-t border-white/[0.04] overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
-              {NAV_LINKS.map((l) => (
+               {NAV_LINKS.map((l) => (
                 <a
                   key={l.label}
                   href={l.href}
@@ -281,11 +283,11 @@ function HeroSection() {
             className="text-6xl sm:text-7xl lg:text-[6rem] xl:text-[6.4rem] font-bold leading-[0.9] mb-8 font-[family-name:var(--font-space-grotesk)] text-white"
             style={{ textShadow: '0 0 40px rgba(255,255,255,0.08), 0 0 80px rgba(255,255,255,0.04)' }}
           >
-            O FUTURO DA SUA MARCA
+            DOMINE
             <br />
-            É ESCRITO COm
+            <span className="whitespace-nowrap">O AMBIENTE</span>
             <br />
-            <span className="iris-gradient-text" style={{ filter: 'drop-shadow(0 0 20px rgba(217,119,47,0.5)) drop-shadow(0 0 60px rgba(217,119,47,0.25))' }}>CÓDIGO E VISÃO TÁTICA.</span>
+            <span className="iris-gradient-text" style={{ filter: 'drop-shadow(0 0 20px rgba(217,119,47,0.5)) drop-shadow(0 0 60px rgba(217,119,47,0.25))' }}>DIGITAL.</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} custom={2} className="text-xl lg:text-[1.35rem] text-[#e8e6e3] max-w-[640px] mb-12 leading-[1.6] font-medium" style={{ textTransform: "none", letterSpacing: 0 }}>
@@ -294,10 +296,10 @@ function HeroSection() {
 
           <motion.div variants={fadeUp} custom={3} className="flex flex-wrap gap-5">
             <a href="#contato" className="bg-[#d9772f] hover:bg-[#e8924e] text-[#0a0a0f] text-base tracking-[0.08em] font-bold font-[family-name:var(--font-space-grotesk)] py-5 px-10 rounded-md flex items-center gap-4 transition-all hover:shadow-[0_0_30px_rgba(217,119,47,0.3)]">
-              AGENDAR BRIEFING <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+              ACESSAR CONSULTORIA <ChevronRight className="w-5 h-5 stroke-[2.5]" />
             </a>
-            <a href="#contato" className="bg-transparent border border-white/20 hover:border-white/40 text-white text-base tracking-[0.08em] font-bold font-[family-name:var(--font-space-grotesk)] py-5 px-10 rounded-md transition-all flex items-center">
-              ACESSE NOSSA CONSULTORIA
+            <a href="#cases" className="bg-transparent border border-white/20 hover:border-white/40 text-white text-base tracking-[0.08em] font-bold font-[family-name:var(--font-space-grotesk)] py-5 px-10 rounded-md transition-all flex items-center">
+              VER PROJETOS
             </a>
           </motion.div>
         </motion.div>
@@ -374,64 +376,88 @@ function HeroSection() {
 function AboutSection() {
   return (
     <section id="sobre" className="relative py-[96px] border-t border-iris-border-subtle bg-[#070a0f]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16">
+        {/* Left — Pillars grid */}
         <motion.div
-           initial="hidden"
-           whileInView="visible"
-           viewport={{ once: true, amount: 0.1 }}
-           variants={stagger}
-           className="grid lg:grid-cols-3 gap-12 items-start"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={stagger}
+          className="grid grid-cols-2 gap-4 items-start"
         >
-          {/* Column 1: Strategy */}
-          <motion.div variants={fadeUp} custom={0} className="flex flex-col gap-6">
-            <div className="iris-section-label">01 / ESTRATÉGIA</div>
-            <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-              ESTRATÉGIA DIGITAL
-            </h3>
-            <p className="text-[14px] leading-relaxed text-iris-text-muted" style={{ textTransform: "none" }}>
-              Mapeamos o DNA do seu negócio para criar uma rota de crescimento digital previsível e escalável. Sem achismos, apenas dados.
-            </p>
-          </motion.div>
-
-          {/* Column 2: Engineering */}
-          <motion.div variants={fadeUp} custom={1} className="flex flex-col gap-6">
-            <div className="iris-section-label">02 / ENGENHARIA</div>
-            <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-              ENGENHARIA DE SOFTWARE
-            </h3>
-            <p className="text-[14px] leading-relaxed text-iris-text-muted" style={{ textTransform: "none" }}>
-              Construímos sistemas robustos com tecnologias state-of-the-art, focando em performance extrema, segurança e código limpo.
-            </p>
-          </motion.div>
-
-          {/* Column 3: Design */}
-          <motion.div variants={fadeUp} custom={2} className="flex flex-col gap-6">
-            <div className="iris-section-label">03 / DESIGN</div>
-            <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">
-              DESIGN DE ALTA PRECISÃO
-            </h3>
-            <p className="text-[14px] leading-relaxed text-iris-text-muted" style={{ textTransform: "none" }}>
-              Interfaces que convertem. Unimos estética disruptiva com uma experiência de usuário cirúrgica e intuitiva.
-            </p>
-          </motion.div>
+          <div className="flex flex-col gap-4">
+            {[PILLARS[0], PILLARS[2]].map((p, i) => (
+              <motion.div
+                key={p.title}
+                variants={fadeUp}
+                custom={i * 2}
+                className="bg-transparent border border-iris-border-subtle p-6 sm:p-8 flex flex-col gap-5 hover:border-iris-orange/30 transition-colors"
+              >
+                <p.icon className="w-6 h-6 text-iris-orange" />
+                <h3 className="text-sm md:text-base font-bold tracking-[0.15em] text-white font-[family-name:var(--font-space-grotesk)]">
+                  {p.title}
+                </h3>
+                <p className="text-[14px] leading-[22.8px] tracking-[-0.2px] text-[#C9BEB1] font-normal" style={{ textTransform: "none" }}>
+                  {p.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex flex-col gap-4 pt-12">
+            {[PILLARS[1], PILLARS[3]].map((p, i) => (
+              <motion.div
+                key={p.title}
+                variants={fadeUp}
+                custom={(i * 2) + 1}
+                className="bg-transparent border border-iris-border-subtle p-6 sm:p-8 flex flex-col gap-5 hover:border-iris-orange/30 transition-colors"
+              >
+                <p.icon className="w-6 h-6 text-iris-orange" />
+                <h3 className="text-sm md:text-base font-bold tracking-[0.15em] text-white font-[family-name:var(--font-space-grotesk)]">
+                  {p.title}
+                </h3>
+                <p className="text-[14px] leading-[22.8px] tracking-[-0.2px] text-[#C9BEB1] font-normal" style={{ textTransform: "none" }}>
+                  {p.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        {/* Optional Stats integration below if needed, or keeping it clean */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="flex justify-center gap-16 border-t border-iris-border-subtle pt-12 mt-20"
+        {/* Right — About text */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
         >
-          <div className="text-center">
-            <span className="text-[32px] sm:text-[40px] font-light text-white font-[family-name:var(--font-space-grotesk)]">100+</span>
-            <p className="text-[10px] tracking-[0.2em] text-iris-orange mt-1">PROJETOS ENTREGUES</p>
-          </div>
-          <div className="text-center">
-            <span className="text-[32px] sm:text-[40px] font-light text-white font-[family-name:var(--font-space-grotesk)]">99%</span>
-            <p className="text-[10px] tracking-[0.2em] text-iris-orange mt-1">UPTIME GARANTIDO</p>
-          </div>
+          <motion.div variants={fadeUp} custom={0} className="iris-section-label mb-6">
+            A AGÊNCIA IRIS
+          </motion.div>
+          <motion.h2
+            variants={fadeUp}
+            custom={1}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-8 text-white font-[family-name:var(--font-space-grotesk)]"
+          >
+            ENGENHARIA DE
+            <br />
+            ALTA PRECISÃO
+          </motion.h2>
+          <motion.p variants={fadeUp} custom={2} className="text-[18px] leading-[29.3px] tracking-[-0.2px] text-[#C9BEB1] font-normal mb-6" style={{ textTransform: "none" }}>
+            A IRIS nasceu da necessidade de elevar o padrão do desenvolvimento web. Não entregamos templates genéricos. Construímos ativos digitais que funcionam como máquinas de vendas e otimização para empresas sérias.
+          </motion.p>
+          <motion.p variants={fadeUp} custom={3} className="text-[18px] leading-[29.3px] tracking-[-0.2px] text-[#C9BEB1] font-normal mb-10" style={{ textTransform: "none" }}>
+            Nosso símbolo reflete nossa essência: o olho que tudo vê no mercado (Estratégia), os circuitos que conectam sistemas (Automação), e o código que constrói a realidade (Engenharia).
+          </motion.p>
+          <motion.div variants={fadeUp} custom={4} className="flex gap-16 border-t border-iris-border-subtle pt-8">
+            <div>
+              <span className="text-[36px] leading-[40px] tracking-[-1.8px] font-light text-[#F5F1EB] font-[family-name:var(--font-space-grotesk)]">100+</span>
+              <p className="text-[10px] tracking-[0.1em] text-iris-text-muted mt-2 font-[family-name:var(--font-jetbrains-mono)]">PROJETOS ENTREGUES</p>
+            </div>
+            <div>
+              <span className="text-[36px] leading-[40px] tracking-[-1.8px] font-light text-[#F5F1EB] font-[family-name:var(--font-space-grotesk)]">99%</span>
+              <p className="text-[10px] tracking-[0.1em] text-iris-text-muted mt-2 font-[family-name:var(--font-jetbrains-mono)]">UPTIME GARANTIDO</p>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -749,6 +775,25 @@ function TestimonialsSection() {
 }
 
 function ContactSection() {
+  const [isPending, setIsPending] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsPending(true);
+    
+    const formData = new FormData(e.currentTarget);
+    const result = await sendContactRequest(formData);
+    
+    setIsPending(false);
+    
+    if (result.success) {
+      toast.success("Mensagem enviada! Entraremos em contato em breve.");
+      (e.target as HTMLFormElement).reset();
+    } else {
+      toast.error(result.error || "Erro ao enviar mensagem.");
+    }
+  }
+
   return (
     <section id="contato" className="relative py-[96px] border-t border-iris-border-subtle">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16">
@@ -794,21 +839,27 @@ function ContactSection() {
           viewport={{ once: true }}
           variants={stagger}
           className="flex flex-col gap-5"
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <motion.div variants={fadeUp} custom={0} className="grid sm:grid-cols-2 gap-5">
             <input
+              required
+              name="name"
               type="text"
               placeholder="Seu nome"
               className="w-full bg-iris-surface border border-iris-border-subtle rounded-lg px-4 py-3 text-sm text-iris-text placeholder:text-iris-text-muted/50 focus:outline-none focus:border-iris-orange/50 transition-colors"
             />
             <input
+              required
+              name="email"
               type="email"
               placeholder="Seu e-mail"
               className="w-full bg-iris-surface border border-iris-border-subtle rounded-lg px-4 py-3 text-sm text-iris-text placeholder:text-iris-text-muted/50 focus:outline-none focus:border-iris-orange/50 transition-colors"
             />
           </motion.div>
           <motion.input
+            required
+            name="subject"
             variants={fadeUp}
             custom={1}
             type="text"
@@ -816,14 +867,22 @@ function ContactSection() {
             className="w-full bg-iris-surface border border-iris-border-subtle rounded-lg px-4 py-3 text-sm text-iris-text placeholder:text-iris-text-muted/50 focus:outline-none focus:border-iris-orange/50 transition-colors"
           />
           <motion.textarea
+            required
+            name="message"
             variants={fadeUp}
             custom={2}
             placeholder="Descreva seu projeto..."
             rows={5}
             className="w-full bg-iris-surface border border-iris-border-subtle rounded-lg px-4 py-3 text-sm text-iris-text placeholder:text-iris-text-muted/50 focus:outline-none focus:border-iris-orange/50 transition-colors resize-none"
           />
-          <motion.button variants={fadeUp} custom={3} type="submit" className="iris-btn-primary w-full justify-center mt-2">
-            ENVIAR MENSAGEM <Send className="w-4 h-4" />
+          <motion.button 
+            disabled={isPending}
+            variants={fadeUp} 
+            custom={3} 
+            type="submit" 
+            className="iris-btn-primary w-full justify-center mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isPending ? "ENVIANDO..." : "ENVIAR MENSAGEM"} <Send className="w-4 h-4" />
           </motion.button>
         </motion.form>
       </div>
@@ -872,6 +931,7 @@ export default function Home() {
       <Navbar />
       <main className="relative z-10">
         <HeroSection />
+        <ContactSection />
         <AboutSection />
         <ServicesSection />
         <MethodologySection />
@@ -879,7 +939,6 @@ export default function Home() {
         <StatsBanner />
         <CasesSection />
         <TestimonialsSection />
-        <ContactSection />
       </main>
       <Footer />
     </>
