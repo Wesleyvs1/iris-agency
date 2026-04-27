@@ -194,11 +194,10 @@ function Navbar() {
     <nav className="absolute top-0 left-0 right-0 z-50 pt-4 bg-transparent">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-3 group">
+        <a href="#inicio" className="flex items-center group">
           <div 
-            className="relative w-[98px] h-[57px] overflow-hidden flex-shrink-0"
+            className="relative w-[110px] h-[65px] flex-shrink-0"
             style={{ 
-              clipPath: 'ellipse(50% 45% at 50% 50%)',
               filter: 'drop-shadow(0 0 10px rgba(217, 119, 47, 0.2))'
             }}
           >
@@ -207,11 +206,14 @@ function Navbar() {
               alt="Logo IRIS"
               width={300}
               height={100}
-              className="absolute left-[-10px] top-1/2 -translate-y-1/2 h-[110%] w-auto max-w-none transition-transform group-hover:scale-110 mix-blend-screen brightness-125 contrast-125"
+              className="absolute left-[-15px] top-1/2 -translate-y-1/2 h-[120%] w-auto max-w-none transition-transform group-hover:scale-110 mix-blend-screen brightness-125 contrast-125"
               priority
             />
           </div>
-          <span className="text-2xl font-bold tracking-[0.2em] font-[family-name:var(--font-space-grotesk)] iris-gradient-text">IRIS</span>
+          <div className="flex items-center ml-[-5px]">
+            <span className="text-[2.6rem] font-[1000] text-white leading-none tracking-[-0.1em] mr-4 font-[family-name:var(--font-heading)]">IF</span>
+            <span className="text-3xl font-bold tracking-[0.25em] font-[family-name:var(--font-space-grotesk)] iris-gradient-text">IRIS</span>
+          </div>
         </a>
 
         {/* Desktop Nav */}
@@ -846,15 +848,15 @@ function ContactSection() {
           <motion.div variants={fadeUp} custom={3} className="flex flex-col gap-4">
             <div className="flex items-center gap-3 text-sm text-iris-text-muted">
               <Mail className="w-4 h-4 text-iris-orange" />
-              <span style={{ textTransform: "none", letterSpacing: 0 }}>contato@irisagency.com</span>
+              <span style={{ textTransform: "none", letterSpacing: 0 }}>devsouiris@gmail.com</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-iris-text-muted">
               <Phone className="w-4 h-4 text-iris-orange" />
-              <span style={{ textTransform: "none", letterSpacing: 0 }}>+55 (11) 9xxxx-xxxx</span>
+              <span style={{ textTransform: "none", letterSpacing: 0 }}>+55 41 98870-7644</span>
             </div>
             <div className="flex items-center gap-3 text-sm text-iris-text-muted">
               <MapPin className="w-4 h-4 text-iris-orange" />
-              <span style={{ textTransform: "none", letterSpacing: 0 }}>São Paulo, SP — Brasil</span>
+              <span style={{ textTransform: "none", letterSpacing: 0 }}>Curitiba, PR — Brasil</span>
             </div>
           </motion.div>
         </motion.div>
