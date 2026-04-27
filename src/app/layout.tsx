@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,6 +54,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-[#06070b] text-white text-[17px] antialiased overflow-x-hidden selection:bg-[#d9772f] selection:text-[#06070b]">
+        <CustomCursor />
         {children}
         <Toaster position="top-right" theme="dark" richColors />
       </body>
