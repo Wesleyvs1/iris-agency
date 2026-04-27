@@ -147,8 +147,8 @@ const CASES = [
     title: "REINO DOS PETS",
     tag: "PET CARE & VETERINARY",
     desc: "Centro veterinário completo com sistema de agendamento online e gestão de cuidados animais, focado em performance e conversão.",
-    image: null,
-    link: "#"
+    image: "/case_reino_pets.png",
+    link: "/arquivos_de_operacao/petpal/index.html"
   },
 ];
 
@@ -668,7 +668,7 @@ function StatsBanner() {
   );
 }
 
-function CasesSection() {
+function CasesSection({ onPreview }: { onPreview: (url: string) => void }) {
   return (
     <section id="cases" className="relative py-[96px] border-t border-iris-border-subtle">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
@@ -702,11 +702,15 @@ function CasesSection() {
           className="grid md:grid-cols-2 gap-6"
         >
           {CASES.map((c, i) => (
-            <motion.a 
+            <motion.div 
               key={c.title} 
-              href={c.link}
-              target={c.link.startsWith('http') ? "_blank" : undefined}
-              rel={c.link.startsWith('http') ? "noopener noreferrer" : undefined}
+              onClick={() => {
+                if (c.link.startsWith('/')) {
+                  onPreview(c.link);
+                } else if (c.link !== '#') {
+                  window.open(c.link, '_blank');
+                }
+              }}
               variants={fadeUp} 
               custom={i} 
               className="iris-card overflow-hidden group block cursor-pointer"
@@ -752,7 +756,7 @@ function CasesSection() {
                   ACESSAR PROJETO <ArrowUpRight className="w-3 h-3" />
                 </div>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </motion.div>
       </div>
@@ -955,6 +959,8 @@ function Footer() {
 /* ─── PAGE ─── */
 
 export default function Home() {
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
   return (
     <>
       <Navbar />
@@ -966,10 +972,66 @@ export default function Home() {
         <MethodologySection />
         <TechStackSection />
         <StatsBanner />
-        <CasesSection />
+        <CasesSection onPreview={setPreviewUrl} />
         <TestimonialsSection />
       </main>
       <Footer />
+
+      <AnimatePresence>
+        {previewUrl && (
+          <CasePreviewModal url={previewUrl} onClose={() => setPreviewUrl(null)} />
+        )}
+      </AnimatePresence>
     </>
+  );
+}
+
+function CasePreviewModal({ url, onClose }: { url: string; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-[#06070b]/95 backdrop-blur-md"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        className="w-full h-full max-w-6xl bg-iris-surface border border-iris-border overflow-hidden rounded-xl flex flex-col shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header/Toolbar */}
+        <div className="bg-iris-surface-light border-b border-iris-border px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-red-500/50" />
+              <div className="w-3 h-3 rounded-full bg-iris-orange/50" />
+              <div className="w-3 h-3 rounded-full bg-green-500/50" />
+            </div>
+            <div className="ml-4 px-3 py-1 bg-iris-surface border border-iris-border rounded-md text-[0.65rem] font-[family-name:var(--font-jetbrains-mono)] text-iris-text-muted flex items-center gap-2 min-w-[200px] sm:min-w-[400px]">
+              <Globe className="w-3 h-3" />
+              {url}
+            </div>
+          </div>
+          <button 
+            onClick={onClose}
+            className="p-2 hover:bg-iris-surface rounded-lg transition-colors text-iris-text-muted hover:text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 bg-white relative">
+          <iframe 
+            src={url} 
+            className="w-full h-full border-none"
+            title="Preview"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
