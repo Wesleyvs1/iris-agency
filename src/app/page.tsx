@@ -134,7 +134,7 @@ const CASES = [
     tag: "TERMINAL ECOSYSTEM",
     desc: "Ecossistema disruptivo com interface terminal-level, infraestrutura serverless e performance otimizada para o padrão IRIS.",
     image: "/case_portfolio.png",
-    link: "https://blackcivic.com.br/"
+    link: "https://portf-tecnologico-phi.vercel.app/"
   },
   {
     title: "AGROFORGE",
