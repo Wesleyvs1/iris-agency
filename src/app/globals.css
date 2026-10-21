@@ -63,12 +63,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button, [role="button"], input, select, textarea {
-      cursor: none !important;
-    }
-  }
-
   html {
     scroll-behavior: smooth;
   }

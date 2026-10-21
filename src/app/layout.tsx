@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
-import CustomCursor from "@/components/CustomCursor";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { getSiteUrl } from "@/lib/site-url";
+
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +26,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
+  alternates: { canonical: "/" },
   title: "IRIS | Centro de Comando Digital",
   description:
     "A IRIS cria sites, automações e resolve problemas web para empresas que exigem uma presença digital de alto impacto. Domine o ambiente digital com nossa tecnologia.",
@@ -54,10 +59,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-[#06070b] text-white text-[17px] antialiased overflow-x-hidden selection:bg-[#d9772f] selection:text-[#06070b]">
-        <CustomCursor />
         {children}
         <Toaster position="top-right" theme="dark" richColors />
       </body>
+      {gaId && /^G-[A-Z0-9]+$/.test(gaId) && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

@@ -210,7 +210,7 @@ function Navbar() {
             }}
           >
             <Image
-              src="/logo (2).png"
+              src="/logo.jpeg"
               alt="Logo IRIS"
               width={300}
               height={100}
@@ -936,7 +936,7 @@ function Footer() {
               }}
             >
               <Image
-                src="/logo (2).png"
+                src="/logo.jpeg"
                 alt="Logo IRIS"
                 width={200}
                 height={70}

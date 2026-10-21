@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Search and analytics
+
+- `NEXT_PUBLIC_SITE_URL` overrides the canonical origin used by metadata, `/robots.txt`, and `/sitemap.xml`. It defaults to `https://www.iirisdigital.com.br`.
+- Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` to the GA4 web stream ID (`G-...`) to load Google Analytics on all pages. No analytics script is loaded when this variable is absent.
+- After deployment, confirm that `/robots.txt` and `/sitemap.xml` are publicly accessible, submit the sitemap in Google Search Console, and verify analytics events in GA4 Realtime or Tag Assistant.
