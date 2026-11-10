@@ -123,6 +123,14 @@ const STATS_BANNER = [
 
 const CASES = [
   {
+    title: "MONTE DO SEU JEITO",
+    tag: "DELIVERY & SAAS",
+    desc: "Plataforma de delivery para múltiplas lojas, com montagem visual de pizzas, lanches e açaí, cardápio digital e gestão de pedidos e entregas.",
+    image: "/case_monte_do_seu_jeito.jpg",
+    link: "https://monte-sua-pizza-burger.vercel.app/",
+    status: "DEMONSTRAÇÃO"
+  },
+  {
     title: "MALLU PET",
     tag: "E-COMMERCE & PET",
     desc: "Plataforma de vendas e cuidados para pets, combinando estética premium com alta performance em conversão e experiência de usuário.",
@@ -725,9 +733,9 @@ function CasesSection({ onPreview }: { onPreview: (url: string) => void }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#06070b] via-transparent to-transparent opacity-60" />
                 
                 <div className="absolute bottom-4 left-4 flex items-center gap-2 z-10">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-[0.6rem] tracking-[0.15em] text-green-400 font-[family-name:var(--font-jetbrains-mono)] font-bold">
-                    STATUS: OPERACIONAL
+                  <span className={`w-2 h-2 rounded-full ${c.status ? "bg-amber-400" : "bg-green-500 animate-pulse"}`} />
+                  <span className={`text-[0.6rem] tracking-[0.15em] font-[family-name:var(--font-jetbrains-mono)] font-bold ${c.status ? "text-amber-300" : "text-green-400"}`}>
+                    STATUS: {c.status ?? "OPERACIONAL"}
                   </span>
                 </div>
               </div>
